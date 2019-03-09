@@ -3,10 +3,12 @@ package com.sda.json;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -26,7 +28,7 @@ public class Main
 
         try {
             String personStr = mapper.writeValueAsString(p1);
-            System.out.println(personStr);
+           // System.out.println(personStr);
             // do pliku person json zapisac wynikowego stringa
 
             Files.write(Paths.get("person.json"),personStr.getBytes());
@@ -37,30 +39,44 @@ public class Main
         }
 
         /////////////////////////////////////
-
         List<Person> listaPersons = new ArrayList<>(); // oparta o tablice //linkenList oparta o obiekty
 
         listaPersons.add(p1);
         listaPersons.add(p2);
         listaPersons.add(p3);
         listaPersons.add(p4);
+        listaPersons.add(new Person("mominek","stary",22));
 
         try {
-
 
             String lista = mapper.writeValueAsString(listaPersons);
             Files.write(Paths.get("person2.json"),lista.getBytes());
 
+            Person[] personArray =  mapper.readValue(new File("person2.json"),Person[].class);// odczytanie z pliku json
+            // jedna uwaga trzeba dodaj w klasie Person pusty konstruktor
+            List <Person> personL = Arrays.asList(personArray);
+            System.out.println(personL.toString());
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-
         List<Student> students = new ArrayList<>();
         students.add(new Student("janek","fasola",new Address("torun","plaska 2")));
         students.add(new Student("zosia","golab",new Address("bydgoszcz","gorna 23")));
         students.add(new Student("milosz","maly",new Address("warszawa","koscielna 45")));
+
+        File studenntListfile = new File("student.json");
+        try {
+            mapper.writeValue(studenntListfile,students);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
     }
 
 

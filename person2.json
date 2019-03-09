@@ -1,0 +1,22 @@
+[
+  {
+    "name": "jan",
+    "lastName": "kowalski",
+    "age": 22
+  },
+  {
+    "name": "tomasz",
+    "lastName": "nowak",
+    "age": 31
+  },
+  {
+    "name": "janusz",
+    "lastName": "plot",
+    "age": 44
+  },
+  {
+    "name": "grazyna",
+    "lastName": "brama",
+    "age": 78
+  }
+]
